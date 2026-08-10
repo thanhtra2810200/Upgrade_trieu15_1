@@ -6,13 +6,14 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ video }: VideoCardProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     const el = videoRef.current;
+
     if (!container || !el) return;
 
     setVideoReady(false);
@@ -34,14 +35,18 @@ export default function VideoCard({ video }: VideoCardProps) {
             if (el.readyState >= 2) {
               tryPlay();
             } else {
-              el.addEventListener('canplay', tryPlay, { once: true });
+              el.addEventListener('canplay', tryPlay, {
+                once: true,
+              });
             }
           } else {
             el.pause();
           }
         }
       },
-      { threshold: 0.6 },
+      {
+        threshold: 0.6,
+      },
     );
 
     observer.observe(container);
@@ -56,8 +61,9 @@ export default function VideoCard({ video }: VideoCardProps) {
   return (
     <div
       ref={containerRef}
-      className="group relative h-full w-full overflow-hidden rounded-sm bg-[#f0ebe2] transition-all duration-700 ease-out hover:-translate-y-0.5"
+      className="group relative h-full w-full overflow-hidden rounded-[2px]"
     >
+      {/* Actual video */}
       <video
         ref={videoRef}
         src={video.src}
@@ -70,6 +76,7 @@ export default function VideoCard({ video }: VideoCardProps) {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
+      {/* Poster shown while video is loading */}
       <img
         src={video.poster}
         alt=""
@@ -81,8 +88,8 @@ export default function VideoCard({ video }: VideoCardProps) {
         }`}
       />
 
-      {/* Subtle bottom gradient overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60 transition-opacity duration-700 group-hover:opacity-80" />
+      {/* Subtle bottom gradient */}
+      <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60 transition-opacity duration-700 group-hover:opacity-80" />
     </div>
   );
 }
