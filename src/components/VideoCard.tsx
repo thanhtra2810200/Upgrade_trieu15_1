@@ -51,6 +51,7 @@ export default function VideoCard({ video }: VideoCardProps) {
       <video
         ref={videoRef}
         src={video.src}
+        poster={video.poster}
         autoPlay
         muted
         loop
