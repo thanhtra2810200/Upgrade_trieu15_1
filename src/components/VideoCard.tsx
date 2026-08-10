@@ -46,7 +46,7 @@ export default function VideoCard({ video }: VideoCardProps) {
   return (
     <div
       ref={containerRef}
-      className="group relative h-full w-full overflow-hidden rounded-xl bg-[#f0ebe2] shadow-[0_2px_12px_rgba(42,34,28,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(42,34,28,0.12)]"
+      className="group relative h-full w-full overflow-hidden rounded-sm bg-[#f0ebe2] transition-all duration-700 ease-out hover:-translate-y-0.5"
     >
       <video
         ref={videoRef}
@@ -61,7 +61,7 @@ export default function VideoCard({ video }: VideoCardProps) {
       />
 
       {/* Subtle bottom gradient overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60 transition-opacity duration-700 group-hover:opacity-80" />
     </div>
   );
 }

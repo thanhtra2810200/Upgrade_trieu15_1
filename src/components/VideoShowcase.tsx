@@ -59,12 +59,12 @@ export default function VideoShowcase() {
       ref={sectionRef}
       aria-label="Video showcase"
       id="video"
-      className="bg-[#FAF8F5] px-6 py-20 md:py-28"
+      className="bg-[#FAF8F5] px-6 py-24 md:py-32"
     >
       <div className="mx-auto max-w-[1200px]">
         {/* Section header */}
-        <div className="mb-12 flex flex-col gap-8 md:mb-16 md:flex-row md:items-end md:justify-between">
-          <div className="flex flex-col gap-3">
+        <div className="mb-14 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-4">
             <span
               className="text-[11px] uppercase tracking-[0.3em] text-[#7a6b5d]"
               style={{ fontFamily: "'JetBrains Mono', monospace" }}
@@ -72,7 +72,7 @@ export default function VideoShowcase() {
               Thư Viện Video
             </span>
             <h2
-              className="text-[32px] leading-[1.1] tracking-tight text-[#2a221c] md:text-[44px]"
+              className="text-[34px] leading-[1.1] tracking-tight text-[#2a221c] md:text-[48px]"
               style={{ fontFamily: "'Newsreader', serif", fontWeight: 400 }}
             >
               Những Khoảnh Khắc Biến Hóa
@@ -123,7 +123,7 @@ export default function VideoShowcase() {
         </Carousel>
 
         {/* Mobile controls */}
-        <div className="mt-8 flex md:hidden">
+        <div className="mt-10 flex justify-center md:hidden">
           {api && (
             <CarouselControls
               scrollPrev={() => api.scrollPrev()}
@@ -135,12 +135,12 @@ export default function VideoShowcase() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 flex justify-center">
+        <div className="mt-24 flex justify-center">
           <a
             href="https://zalo.me/0942777009"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#2a221c] px-10 py-4 text-[12px] uppercase tracking-[0.15em] text-white transition-colors duration-300 hover:bg-[#3d2f24] active:scale-95"
+            className="bg-[#2a221c] px-12 py-4 text-[11px] uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#3d2f24] active:scale-95"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             Đặt Lịch Hẹn
