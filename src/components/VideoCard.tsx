@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import type { VideoItem } from '@/data/videoData';
 
 interface VideoCardProps {
@@ -8,15 +8,24 @@ interface VideoCardProps {
 export default function VideoCard({ video }: VideoCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     const el = videoRef.current;
     if (!container || !el) return;
 
+    setVideoReady(false);
+
     const tryPlay = () => {
       el.play().catch(() => {});
     };
+
+    const handleLoadedData = () => {
+      setVideoReady(true);
+    };
+
+    el.addEventListener('loadeddata', handleLoadedData);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -40,8 +49,9 @@ export default function VideoCard({ video }: VideoCardProps) {
     return () => {
       observer.disconnect();
       el.removeEventListener('canplay', tryPlay);
+      el.removeEventListener('loadeddata', handleLoadedData);
     };
-  }, []);
+  }, [video.src]);
 
   return (
     <div
@@ -57,7 +67,18 @@ export default function VideoCard({ video }: VideoCardProps) {
         loop
         playsInline
         preload="metadata"
-        className="h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      <img
+        src={video.poster}
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        decoding="async"
+        className={`pointer-events-none absolute inset-0 z-10 h-full w-full object-cover transition-opacity duration-500 ease-out ${
+          videoReady ? 'opacity-0' : 'opacity-100'
+        }`}
       />
 
       {/* Subtle bottom gradient overlay */}
